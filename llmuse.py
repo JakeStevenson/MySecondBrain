@@ -78,7 +78,7 @@ class SourcedAnswer(BaseModel):
 def ask(question) :
     # Let's look at our sources, how reliable is the answer?
     # We do a similarity search, and discard documents with no source, or with too low of a score
-    # NOTE:  THIS ONLY DISCORDS FROM CITATIONS, NOT FROM THE ANSWER
+    # NOTE:  THIS ONLY DISCARDS FROM CITATIONS, NOT FROM THE ANSWER
     docs = vectorstore.similarity_search_with_score(question)
     sources = [doc[0].metadata["source"] for doc in docs if hasattr(doc[0], "metadata") and doc[0].metadata and doc[1]<1]
 
