@@ -1,0 +1,6 @@
+chromadb
+fastapi
+langchain
+pydantic
+uvicorn
+gpt4all
