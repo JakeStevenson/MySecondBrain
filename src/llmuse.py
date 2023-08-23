@@ -6,6 +6,7 @@ collection_directory    = "./"
 # Some general python niceities
 from typing import List
 from pydantic import BaseModel
+from datetime import datetime
 
 # Support our embeddings, vectordatabase, and langchain needs
 import chromadb
@@ -65,7 +66,9 @@ def read_web(url) :
 
 # Learn a new fact
 def learn(text) :
-    document = Document(page_content=text, metadata={"source": "a little birdie"})
+    current_datetime = datetime.now()
+    source = "Informed by user on " + current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    document = Document(page_content=text, metadata={"source": source})
     vectorstore.add_documents([document])
     vectorstore.persist()
     return
