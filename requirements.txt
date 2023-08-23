@@ -4,3 +4,4 @@ langchain
 pydantic
 uvicorn
 gpt4all
+bs4
