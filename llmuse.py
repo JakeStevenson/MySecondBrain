@@ -1,5 +1,5 @@
 # A couple of magic strings
-chatModel               = "llama2"
+chatModel               = "llama2:13b"
 collection_name         = "second_brain"
 collection_directory    = "./"
 
@@ -85,7 +85,7 @@ def ask(question) :
     # Only give unique items.
     sources = list(set(sources))
     
-    # Get the answer
+    # Infer an answer
     qa_chain = RetrievalQA.from_chain_type(
         chatllm,
         retriever=vectorstore.as_retriever(),
