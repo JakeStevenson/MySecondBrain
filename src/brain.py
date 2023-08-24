@@ -27,6 +27,7 @@ vectorstore = Chroma(client=persistent_client,
                      embedding_function=GPT4AllEmbeddings(), 
                      persist_directory=collection_directory)
 
+# Split it up AND overlap the chunks somewhat so we don't lose some context between splits.
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=20)
 
 # Define out interface
