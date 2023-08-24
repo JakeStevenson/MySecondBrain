@@ -21,9 +21,6 @@ class Inform(BaseModel):
 class Article(BaseModel):
     url: str
 
-class Output(BaseModel):
-    output: str
-
 # Set up the app
 app=FastAPI()
 
@@ -34,7 +31,7 @@ async def home():
 @app.post("/read_article")
 async def read_article(input: Article):
     read_web(input.url)
-    return "Read " + input.url
+    return "Read article at '" + input.url + "'"
 
 @app.post("/learn_fact")
 async def learn_fact(input: Inform):
@@ -45,9 +42,9 @@ async def learn_fact(input: Inform):
 async def ask_question(input: Question):
     answer = ask(input.question)
     json_answer = jsonable_encoder(answer)
-    return JSONResponse(content=json_answer)
+    return JSONResponse(json_answer)
 
-
+#Basics to run the API
 origins = [
     "<http://localhost>",
     "<http://localhost:5173>",
