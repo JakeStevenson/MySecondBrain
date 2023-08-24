@@ -8,15 +8,11 @@ from datetime import datetime
 
 # Support our embeddings, vectordatabase, and langchain needs
 import chromadb
+from langchain.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders import WebBaseLoader
 from langchain.docstore.document import Document
-from langchain.vectorstores import Chroma
 from langchain.embeddings import GPT4AllEmbeddings
-
-# Hide some useless warnings
-import warnings
-warnings.filterwarnings('ignore')
 
 # Set up the vector database and client we will use
 persistent_client = chromadb.PersistentClient()
