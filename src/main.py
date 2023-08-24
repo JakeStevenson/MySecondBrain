@@ -33,7 +33,7 @@ async def home():
 
 @app.post("/read_article")
 async def read_article(input: Article):
-    read_web(input.url)
+    await read_web(input.url)
     return "Read " + input.url
 
 @app.post("/learn_fact")

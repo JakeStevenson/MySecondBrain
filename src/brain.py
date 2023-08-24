@@ -58,18 +58,18 @@ chatllm = Ollama(base_url="http://localhost:11434",
 
 # Define out interface
 # Read an article and store it
-def read_web(url) : 
-    data = WebBaseLoader(url).load()
+async def read_web(url) : 
+    data = await WebBaseLoader(url).aload()
     all_split = text_splitter.split_documents(data)
-    ids = vectorstore.add_documents(all_split)
+    ids = await vectorstore.aadd_documents(all_split)
     return
 
 # Learn a new fact
-def learn(text) :
+async def learn(text) :
     current_datetime = datetime.now()
     source = "Informed by user on " + current_datetime.strftime("%Y-%m-%d %H:%M:%S")
     document = Document(page_content=text, metadata={"source": source})
-    vectorstore.add_documents([document])
+    vectorstore.aadd_documents([document])
     vectorstore.persist()
     return
 
@@ -93,8 +93,11 @@ def ask(question) :
         chatllm,
         retriever=vectorstore.as_retriever(),
         chain_type_kwargs={"prompt": QA_CHAIN_PROMPT},
+        return_source_documents=True
     )
     answer =  qa_chain({"query": question})
+    print()
+    print(answer["source_documents"])
     
     # Put it together nicely for our UI
     sourced_answer = SourcedAnswer(
