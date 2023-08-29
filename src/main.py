@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # My other code
-from brain import learn, ask, read_web
+from brain_with_llama import learn, ask, read_web
 
 # Models for my API
 class Question(BaseModel):
